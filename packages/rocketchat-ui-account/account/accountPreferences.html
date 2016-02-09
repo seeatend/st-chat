@@ -1,0 +1,92 @@
+<template name="accountPreferences">
+    <section class="page-container page-home page-static">
+        <head class="fixed-title">
+			{{> burger}}
+            <h2>
+                <span class="room-title">{{_ "Preferences"}}</span>
+            </h2>
+        </head>
+        <div class="content">
+            <div class="rocket-form">
+                <fieldset>
+                    <div class="{{isCordova}}" style="margin-bottom: 23px">
+						<div class="input-line">
+							<label class="header">Desktop Notifications</label>
+
+                            <input type="radio" name="notifications" value="1" checked="{{$eq notificationsEnabled true}}" />Enabled
+							<input type="radio" name="notifications" value="0" checked="{{$eq notificationsEnabled false}}" />Disabled
+						</div>
+					</div>
+                    <label class="header">Profile</label>
+                    <div class="input-line">
+                        <label for="firstName">First Name</label>
+                        <div>
+                            <input type="text" name='firstName' id='firstName' value="{{firstName}}" />
+                        </div>
+                    </div>
+                    <div class="input-line">
+                        <label for="lastName">Last Name</label>
+                        <div>
+                            <input type="text" name='lastName' id='lastName' value="{{lastName}}" />
+                        </div>
+                    </div>
+                    <div class="input-line">
+                        <label for="degreeSelect">Degree</label>
+                        <div>
+							{{> degreeSelect degree=degree otherDegree=otherDegree}}
+                        </div>
+                    </div>
+                    <div class="input-line">
+                        <label for="mobilePhone">Mobile Phone no.</label>
+                        <div>
+                            <input type="text" name='mobilePhone' id='mobilePhone' value="{{mobilePhone}}" />
+                        </div>
+                    </div>
+                    <div class="input-line">
+                        <label for="username">{{_ "Username"}}</label>
+                        <div>
+							{{#if allowUsernameChange}}
+                                <input type="text" name="username" id="username" placeholder="{{username}}" />
+							{{else}}
+                                <input type="text" name="username" id="username" placeholder="{{username}}" disabled="disabled" title="{{usernameChangeDisabled}}" />
+							{{/if}}
+                        </div>
+                    </div>
+                    <div class="input-line">
+                        <label for="password">{{_ "Old_Password"}}</label>
+                        <div>
+							{{#if allowPasswordChange}}
+                                <input type="password" name="oldPassword" id="oldPassword" />
+							{{else}}
+                                <input type="password" name="oldPassword" id="oldPassword" disabled="disabled" title="{{passwordChangeDisabled}}" />
+							{{/if}}
+                        </div>
+                    </div>
+                    <div class="input-line">
+                        <label for="password">New Password</label>
+                        <div>
+							{{#if allowPasswordChange}}
+                                <input type="password" name="password" id="password" />
+							{{else}}
+                                <input type="password" name="password" id="password" disabled="disabled" title="{{passwordChangeDisabled}}"/>
+							{{/if}}
+                        </div>
+                    </div>
+                    <div class="input-line">
+                        <label for="language">{{_ "Language"}}</label>
+                        <div>
+                            <select id="language" class="required">
+								{{#each languages}}
+                                    <option value="{{key}}" selected="{{userLanguage key}}" dir="auto">{{name}}</option>
+								{{/each}}
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="submit">
+                    <button class="button"><i class="icon-send"></i><span>{{_ "Save_changes"}}</span></button>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

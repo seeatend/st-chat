@@ -1,0 +1,30 @@
+<template name="addUserToRoom">
+    <section id="addUserToRoom" class="rocket-modal {{this.class}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="wrapper">
+            <div class="window">
+                <form id="add-user-to-room-form" class="modal form-horizontal">
+                    <header>
+                        <h3 style="float: left">Add User(s) to Group</h3>
+                        <span class="close"><i class="icon-cancel close-modal"></i></span>
+                    </header>
+                    <main>
+                        <div class="input-line">
+                            <label for="room-members">Select user(s) to add to this group</label>
+							{{> inputAutocomplete settings=autocompleteSettings id="room-members" class="search" placeholder=tRoomMembers autocomplete="off"}}
+                            <ul class="selected-users">
+								{{#each usersInRoom}}
+									{{#if isNew}}
+                                        <li>{{name}} <i class="icon-cancel remove-room-member"></i></li>
+									{{/if}}
+								{{/each}}
+                            </ul>
+                        </div>
+                    </main>
+                    <footer>
+                        <button id="addUserToRoomSubmit" class="button primary" type="submit" data-loading-text="{{_ "Please_wait"}}..."><span>Done</span></button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </section>
+</template>

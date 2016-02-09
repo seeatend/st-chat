@@ -1,0 +1,90 @@
+<template name="adminUsers">
+    <section class="page-container page-list">
+        <head class="fixed-title">
+			{{> burger}}
+            <h2>
+                <span class="room-title">{{_ "Users"}}</span>
+            </h2>
+        </head>
+        <div class="content">
+			{{#unless hasPermission 'view-user-administration'}}
+                <p>You are not authorized to view this page.</p>
+			{{else}}
+                <form class="edit-form">
+                    <h2 style="margin-bottom: 10px">{{_ "Send_invitation_email"}}</h2>
+                    <div class="input-line">
+                        <label for="inviteEmails">{{_ "Send_invitation_email_info"}}</label>
+                        <textarea id="inviteEmails" rows="3" style="height: auto"></textarea>
+                    </div>
+                </form>
+                <nav>
+                    <button class='button cancel secondary'><span>Clear</span></button>
+                    <button class='button blue send' data-loading-text="{{_ "Please_wait"}}"><span>{{_ "Send"}}</span></button>
+                </nav>
+				{{#if inviteEmails.length}}
+                    <div class="about clearfix" style="margin-top: 30px">
+                        <p style="color: #51a351"> {{_ "Send_invitation_email_success"}} </p>
+                        <ul style="margin: 5px 10px">
+							{{#each inviteEmails}}
+                                <li style="margin-top: 5px">{{.}}</li>
+							{{/each}}
+                        </ul>
+                    </div>
+				{{/if}}
+                <h2 style="margin: 20px 0 10px">Find Users</h2>
+                <form class="search-form" role="form">
+                    <div class="input-line search">
+                        <input type="text" id="users-filter" placeholder="{{_ "Search"}}" dir="auto">
+                        <i class="icon-search"></i>
+						{{#unless isReady}}<i class="icon-spin4"></i>{{/unless}}
+                    </div>
+                </form>
+                <div class="results">
+					{{{_ "Showing_results" users.length}}}
+                </div>
+                <div class="list">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th width="34%">{{_ "Name"}}</th>
+                            <th width="33%">{{_ "Username"}}</th>
+                            <th width="33%">{{_ "E-mail"}}</th>
+                            <th width="10%">Admin</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+						{{#each users}}
+							{{> adminUser }}
+						{{/each}}
+                        </tbody>
+                    </table>
+					{{#if hasMore}}
+                        <button class="button secondary load-more {{isLoading}}">{{_ "Load_more"}}</button>
+					{{/if}}
+                </div>
+			{{/unless}}
+        </div>
+    </section>
+    <section class="flex-tab">
+        <div class="user-view">
+			{{> Template.dynamic template=flexTemplate data=flexData}}
+        </div>
+    </section>
+</template>
+
+<template name="adminUser">
+    <tr class="user-info" data-id="{{_id}}">
+        <td>
+            <div class="user-image status-{{status}}">
+				{{> avatar username=username}}
+            </div>
+        </td>
+        <td>{{name}}</td>
+        <td>{{username}}</td>
+        <td>{{emailAddress}}</td>
+        <td>
+            <input type="checkbox" name="is-admin" id="is-admin" checked="{{isAdmin}}" {{adminToggleDisabled}}>
+        </td>
+    </tr>
+</template>

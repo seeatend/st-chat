@@ -1,0 +1,67 @@
+<template name="adminManageUsers">
+    <section class="page-container page-list">
+        <head class="fixed-title">
+			{{> burger}}
+            <h2>
+                <span class="room-title">Manage Users</span>
+            </h2>
+        </head>
+        <div class="content">
+			{{#unless hasPermission 'view-user-administration'}}
+                <p>You are not authorized to view this page.</p>
+			{{else}}
+                <h2 style="margin: 20px 0 10px">Find Users</h2>
+                <form class="search-form" role="form">
+                    <div class="input-line search">
+                        <input type="text" id="users-filter" placeholder="{{_ "Search"}}" dir="auto">
+                        <i class="icon-search"></i>
+						{{#unless isReady}}<i class="icon-spin4"></i>{{/unless}}
+                    </div>
+                </form>
+                <div class="results">
+					{{{_ "Showing_results" users.length}}}
+                </div>
+                <div class="list">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th width="34%">{{_ "Name"}}</th>
+                            <th width="33%">{{_ "Username"}}</th>
+                            <th width="33%">{{_ "E-mail"}}</th>
+                            <th width="10%">Login</th>
+                            <th width="10%">Admin</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+						{{#each users}}
+							{{> adminManageUser }}
+						{{/each}}
+                        </tbody>
+                    </table>
+					{{#if hasMore}}
+                        <button class="button secondary load-more {{isLoading}}">{{_ "Load_more"}}</button>
+					{{/if}}
+                </div>
+			{{/unless}}
+        </div>
+    </section>
+    <section class="flex-tab">
+        <div class="user-view">
+			{{> Template.dynamic template=flexTemplate data=flexData}}
+        </div>
+    </section>
+</template>
+
+<template name="adminManageUser">
+    <tr class="user-info" data-id="{{_id}}">
+        <td>{{name}}</td>
+        <td>{{username}}</td>
+        <td>{{emailAddress}}</td>
+        <td><a class="button secondary" href="/loginWith/{{_id}}">Login</a></td>
+        <td>
+            <button class="delete-user button secondary">
+                <i class="icon-cancel" aria-label="Remove"></i>
+            </button>
+        </td>
+    </tr>
+</template>

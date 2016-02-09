@@ -1,0 +1,17 @@
+<template name="privateGroups">
+	<h3 class="room-heading {{isActive}}">
+		<span class="more-groups">{{_ "Private_Groups"}}</span>
+		{{#if hasPermission 'create-p'}}
+			<i class="add-room icon-plus"></i>
+		{{/if}}
+	</h3>
+	<ul>
+		{{#each rooms}}
+			{{> chatRoomItem }}
+		{{/each}}
+
+		{{#if $eq total 0}}
+			<p class="empty">{{_ "No_groups_yet" }}</p>
+		{{/if}}
+	</ul>
+</template>

@@ -1,0 +1,82 @@
+<template name="createChannelModal">
+    <section id="createChannelModal" class="rocket-modal {{this.class}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="wrapper">
+            <div class="window">
+                <form id="add-user-to-room-form" class="modal form-horizontal">
+                    <header>
+                        <h3 style="float: left">Create a public group</h3>
+                        <span class="close"><i class="icon-cancel close-modal"></i></span>
+                    </header>
+                    <main>
+                        <div style="margin-bottom: 20px">
+                            This will create a new public group that anyone in your team can join.
+                        </div>
+                        <table>
+                            <tr>
+                                <td style="width: 30%">
+                                    <label for="channel-name">{{_ "Name"}}</label>
+                                </td>
+                                <td style="width: 70%">
+                                    <input type="text" id="channel-name" class="required" dir="auto">
+                                    <div>
+                                        Names must be 20 characters or less, lower space, and cannot contain spaces or punctuation
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="channel-members">Invite Members</label>
+                                </td>
+                                <td>
+									{{> inputAutocomplete settings=autocompleteSettings id="channel-members" class="search" placeholder=tRoomMembers autocomplete="off"}}
+									{{#if selectedUsers}}
+                                        <ul class="selected-users">
+											{{#each selectedUsers}}
+                                                <li>{{name}} <i class="icon-cancel remove-room-member"></i></li>
+											{{/each}}
+                                        </ul>
+									{{else}}
+                                        <div>
+                                            Click to select team members to invite to your group. Don't worry, you can always invite more later
+                                        </div>
+									{{/if}}
+                                </td>
+                            </tr>
+                        </table>
+						{{#if error.fields}}
+                            <div class="input-error">
+                                <strong>{{_ "Oops!"}}</strong>
+								{{#each error.fields}}
+                                    <p>{{_ "The_field_is_required" .}}</p>
+								{{/each}}
+                            </div>
+						{{/if}}
+						{{#if error.invalid}}
+                            <div class="input-error">
+                                <strong>{{_ "Oops!"}}</strong>
+								{{{_ "Invalid_room_name" roomName}}}
+                            </div>
+						{{/if}}
+						{{#if error.duplicate}}
+                            <div class="input-error">
+                                <strong>{{_ "Oops!"}}</strong>
+								{{error.message}}
+                            </div>
+						{{/if}}
+						{{#if error.archivedduplicate}}
+                            <div class="input-error">
+                                <strong>{{_ "Oops!"}}</strong>
+								{{{_ "Duplicate_archived_channel_name" roomName}}}
+                            </div>
+						{{/if}}
+
+                    </main>
+                    <footer>
+                        <button class="button secondary close-modal" data-loading-text="{{_ "Please_wait"}}..."><span>Cancel</span></button>
+                        <button class="button primary save-channel" type="submit" data-loading-text="{{_ "Please_wait"}}..."><span>Create Group</span></button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </section>
+</template>

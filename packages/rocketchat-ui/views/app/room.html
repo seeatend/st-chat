@@ -1,0 +1,106 @@
+<template name="room">
+  <div class="dropzone">
+		<div class="dropzone-overlay">
+			<div>
+				{{_ "Drop_to_upload_file"}}
+			</div>
+		</div>
+		<section class="messages-container {{adminClass}}" id="{{windowId}}" aria-label="{{_ "Channel"}}">
+			<header class="fixed-title">
+				{{> burger}}
+				<h2>
+					{{#if showToggleFavorite}}
+						<a href="#favorite" class="toggle-favorite"><i class="{{favorite}}" aria-label="{{_ favoriteLabel}}"></i></a>
+					{{/if}}
+						<i class="{{roomIcon}} status-{{userStatus}}"></i>
+						<span class="room-title {{editingTitle}}">{{roomName}}</span>
+					{{#if canEditName}}
+						<input type="text" id="room-title-field" class="{{showEditingTitle}}" value="{{roomNameEdit}}" dir="auto">
+						<a href="#edit" class="edit-room-title"><i class="icon-pencil" aria-label="{{_ "Edit"}}"></i></a>
+					{{/if}}
+                    <a href="#add-user" class="add-user-to-room"><i class="icon-user-plus" aria-label="Add user"></i></a>
+					{{#if hasActiveSubscription}}
+						{{#unless isCordova}}
+							<a href="#search" class="message-search"><i class="icon-search" aria-label="Search"></i></a>
+							{{#unless isDirect}}
+								<a href="#notifications" class="room-notifications"><i class="icon-cog" aria-label="Notification Settings"></i></a>
+							{{/unless}}
+						{{/unless}}
+					{{/if}}
+				</h2>
+      </header>
+			<div class="container-bars">
+				{{#each uploading}}
+					<div class="upload-progress">
+						<div class="upload-progress-progress" style="width: {{percentage}}%;"></div>
+						<div class="upload-progress-text">
+							{{_ "Uploading"}} {{name}}... {{percentage}}%
+              <a>cancel</a>
+						</div>
+					</div>
+					{{#if error}}
+						{{ showError }}
+					{{/if}}
+				{{/each}}
+
+				{{#if unreadCount}}
+					{{#if unreadSince}}
+						<div class="unread-bar">
+							{{_ "S_new_messages_since_s" unreadCount formatUnreadSince}}
+								<a>
+								{{_ "Mark_as_read"}}
+								</a>
+            </div>
+					{{/if}}
+				{{/if}}
+    	</div>
+      <div class="messages-box {{#if selectable}}selectable{{/if}} {{compactView}}">
+				<div class="ticks-bar"></div>
+				<div class="wrapper {{#if hasMoreNext}}has-more-next{{/if}}">
+          <ul aria-live="polite">
+						{{#if hasMore}}
+							<li class="load-more">
+								{{#if isLoading}}
+									<div class="load-more-loading">{{_ "Loading_more_from_history"}}...</div>
+								{{else}}
+									<a href="">{{_ "Has_more"}}...</a>
+								{{/if}}
+							</li>
+						{{else}}
+							<li class="start">
+								{{_ "Start_of_conversation"}}
+							</li>
+						{{/if}}
+						{{#each messagesHistory}}
+							{{> message}}
+						{{/each}}
+						{{#if hasMoreNext}}
+							<li class="load-more">
+								{{#if isLoading}}
+									<div class="load-more-loading">{{_ "Loading_more_from_history"}}...</div>
+								{{else}}
+									<a href="">{{_ "Has_more"}}...</a>
+								{{/if}}
+							</li>
+						{{/if}}
+         	</ul>
+        </div>
+        <div class="new-message not">
+          <i class="icon-down-big"></i>
+            <span>{{_ "New_messages"}}</span>
+        </div>
+				<div class="jump-recent {{#unless hasMoreNext}}not{{/unless}}">
+					<span class="jump-link">{{_ "Jump_to_recent_messages"}} <i class="icon-level-down"></i></span>
+				</div>
+			</div>
+			<footer class="footer">
+				{{> messageBox}}
+			</footer>
+    </section>
+		{{> roomNotifications roomId=roomId}}
+	  	{{> addUserToRoom roomId=roomId}}
+    <section class="flex-tab">
+			{{> Template.dynamic template=flexTemplate data=flexData}}
+    </section>
+  </div>
+</template>

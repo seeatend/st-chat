@@ -1,0 +1,44 @@
+<template name="roomNotifications">
+    <section id="roomNotifications" class="rocket-modal {{this.class}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="wrapper">
+            <div class="window">
+                <form id="room-notifications-form" class="modal form-horizontal">
+                    <header>
+                        <h3 style="float: left">Notification Settings</h3>
+                        <span class="close"><i class="icon-cancel"></i></span>
+                    </header>
+                    <main>
+                        <div class="input-line" style="margin-bottom: 23px">
+                            <label style="margin-bottom: 15px" class="header">
+                                <i class="icon-laptop"></i>
+								Desktop notifications
+							</label>
+
+                            <label><input type="radio" name="desktop-notifications" value="all" checked="{{$eq notifications.desktop 'all'}}" />Activity of any kind</label>
+                            <label><input type="radio" name="desktop-notifications" value="mentions" checked="{{$eq notifications.desktop 'mentions'}}" />Mentions of my name</label>
+                            <label><input type="radio" name="desktop-notifications" value="none" checked="{{$eq notifications.desktop 'none'}}" />Nothing</label>
+                        </div>
+                        <div class="input-line"  style="margin-bottom: 23px">
+                            <label style="margin-bottom: 15px" class="header">
+                                <i style="font-size: 18px" class="icon-mobile"></i>
+								Mobile push notifications
+							</label>
+
+                            <label><input type="radio" name="mobile-notifications" value="all" checked="{{$eq notifications.mobile 'all'}}" />Activity of any kind</label>
+                            <label><input type="radio" name="mobile-notifications" value="mentions" checked="{{$eq notifications.mobile 'mentions'}}" />Mentions of my name</label>
+                            <label><input type="radio" name="mobile-notifications" value="none" checked="{{$eq notifications.mobile 'none'}}" />Nothing</label>
+                        </div>
+						<label>
+							<i class="icon-bell-off-empty"></i>
+							Mute this conversation
+							<input id="muteNotifications" type="checkbox" checked="{{notifications.muteAll}}">
+						</label>
+                    </main>
+                    <footer>
+                        <button id="roomNotificationsSubmit" class="button primary" type="submit" data-loading-text="{{_ "Please_wait"}}..."><span>Done</span></button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </section>
+</template>

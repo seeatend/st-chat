@@ -1,0 +1,88 @@
+<template name="subscribe">
+		
+ 		{{#if hasPermission 'view-billing-setting'}}
+			<div class="org-sub">
+				{{#if orgSub.empty}}
+					<div class="org-no-sub">
+						<h2>Your team is a Basic subscriber.</h2>
+						<button class="button create-sub">Go Premium</button>
+ 						<h2>Compare plans and features on our <a href="https://www.teamstitch.com/pricing/" target="_blank">Pricing Page.</a></h2>
+						<!--<ul>
+							<li>Instant search</li>
+							<li>Notification settings</li>
+							<li>Extended file upload support</li>
+							<li>Usage analytics</li>
+							<li>Multi-domain login</li>
+							<li>Priority support</li>
+						</ul> -->
+					</div>
+				{{/if}}
+
+				{{#if orgSub.ready}}
+					<h2>Your team is a {{orgSub.details.plan}} subscriber</h2>
+					<h2>Subscription details:</h2>
+					<p><strong>Subscription id: </strong>{{orgSub.details.subscriptionId}}</p>
+					<p><strong>Status: </strong>{{orgSub.details.status}}</p>
+					<p><strong>Plan: </strong>{{orgSub.details.plan}}</p>
+					<p><strong>Users quantity: </strong>{{orgSub.details.quantity}}</p>
+					<p><strong>Start: </strong>{{orgSub.details.start}}</p>
+					<p><strong>Next payment due: </strong>{{orgSub.details.nextPaymentDue}}</p>
+				{{/if}}
+			</div>	
+			<!-- XXX -->
+			{{#if orgSub.error}}
+				<div class="alert alert-danger">
+					Card declined
+				</div>
+			{{/if}}
+			
+			{{#if orgSub.invalid}}
+				<div class="alert alert-danger">
+					Card declined
+				</div>
+			{{/if}}
+
+			<form id="payment-form" method='/' style="display:none;">
+				<div class="fields">
+					<div class="input-line">
+						<h2 class="header">Step 1: Select payment option for your team</h2>
+					</div>
+					<div class="input-line">
+						<label class="billing-type-radio">
+							<input type="radio" name="plan" value="premium" /><strong>Premium</strong> Monthly Billing
+							<span class="price-right-label">$5 <br><span>per user / month</span></span>
+							<span class="price-bottom-label">$5 per month for 1 user (You'll spend $60 per year)</span>
+						</label>
+						<label class="billing-type-radio">
+							<input type="radio" name="plan" value="power" /><strong>Power Beta</strong>	Monthly Billing
+							<span class="price-right-label">$10 <br><span>per user / month</span></span>
+							<span class="price-bottom-label">$10 per month for 1 user (You'll spend $120 per year)</span>
+						</label>
+					</div>
+					<div class="input-line">
+						<h2 class="header">Step 2: Add payment method</h2>
+					</div>
+				  <div class='input-text cc-number'>
+				    <input type="text" name='cc-number' placeholder='Card Number' size="20" data-stripe="number" class="{{ccType}}" required/>
+			    </div>
+					<div class='input-text cc-exp'>
+						<input type="text" name='cc-exp-month' placeholder='Expiration (MM)' size="2" data-stripe="exp-month"/>
+					</div>
+					<div class='input-text cc-exp'>
+						<input type="text" name='cc-exp-year' placeholder='Expiration (YYYY)' size="4" data-stripe="exp-year"/>
+					</div>
+					<div class='input-text cc-cvc'>
+						<input type="text" name='cc-cvc' placeholder='CVC' size="4" data-stripe="cvc"/>
+					</div>
+				</div>  
+				<div class="submit"> 
+					<button data-loading-text="{{_ "Please_wait"}}..." class='button primary make-payment'><span>Make Payment</span></button>
+				</div>
+			</form>
+			{{else}}
+				<div>
+					<p>You are not authorized to view this page.</p><br>
+					<a href="{{pathFor 'home'}}">Back to app</a>
+				</div>
+			{{/if}}
+</template>

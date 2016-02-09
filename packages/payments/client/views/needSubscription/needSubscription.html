@@ -1,0 +1,9 @@
+<template name="needSubscription">
+	{{#if orgDetails.ready}}
+		<h2>{{orgDetails.name}} has reached the user limit on the Basic plan</h2>
+		<p>Please contact your admin at {{orgDetails.email}} to request an upgrade.</p>
+		<div class="login-terms">
+			<a href="{{pathFor 'home'}}">Back to app</a>
+		</div>
+	{{/if}}
+</template>

@@ -1,0 +1,15 @@
+<template name="patientChannels">
+    <h3 class="room-heading {{isActive}}">
+		<span class="more-patients">{{_ "Patients"}}</span>
+		{{#if hasPermission 'create-c'}}
+            <i class="add-room icon-plus"></i>
+		{{/if}}
+    </h3>
+    <ul>
+		{{#each rooms}}
+			{{> chatRoomItem }}
+		{{else}}
+            <p class="empty">{{_ "No_channels_yet" }}</p>
+		{{/each}}
+    </ul>
+</template>

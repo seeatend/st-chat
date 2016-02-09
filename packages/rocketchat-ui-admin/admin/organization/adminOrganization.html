@@ -1,0 +1,99 @@
+<template name="adminOrganization">
+    <section class="page-container page-list">
+        <head class="fixed-title">
+            {{> burger}}
+            <h2>
+                <span class="room-title">Organization</span>
+            </h2>
+        </head>
+        <div class="content">
+            <div class="input-line">
+                <h2>
+                    Organization Name
+                </h2>
+                <table>
+                    <tbody>
+                    <tr class="user-info">
+                        <td>
+                            <input type="text" id='org-name' value="{{orgName}}" />
+                        </td>
+                        <td style="width: 20%">
+                            <button class="edit-org-name button">
+                                Submit
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            {{#if domains}}
+                <h2>
+                    Domains
+                </h2>
+                <br>
+                <div class="list">
+                    <table>
+                        <tbody>
+                        {{#each domains}}
+                            {{> domain}}
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            {{/if}}
+            <h2 style="margin: 12px 0">
+                Request Additional Domain
+            </h2>
+            <div class="input-line">
+                <div style="margin-bottom: 12px">
+                    This will allow you to invite users with the indicated domain to join your team.
+                </div>
+                <table>
+                    <tbody>
+                    <tr class="user-info">
+                        <td style="width: 30%">
+                            Website URL
+                        </td>
+                        <td style="width: 30%">
+                            Site Name
+                        </td>
+                        <td style="width: 30%">
+                            Email Domain
+                        </td>
+                        <td style="width: 10%">
+
+                        </td>
+                    </tr>
+                    <tr class="user-info">
+                        <td>
+                            <input type="text" id='requester-site-url' placeholder="e.g. www.partners.org" />
+                        </td>
+                        <td>
+                            <input type="text" id='requester-site-name' placeholder="e.g. Partners Healthcare" />
+                        </td>
+                        <td>
+                            <input type="text" id='requester-domain' placeholder="e.g. @partners.org" />
+                        </td>
+                        <td>
+                            <button class="request-domain button">
+                                Submit
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="flex-tab">
+        <div class="user-view">
+            {{> Template.dynamic template=flexTemplate data=flexData}}
+        </div>
+    </section>
+</template>
+
+<template name="domain">
+    <tr style="height:30px">
+        <td>{{this}}</td>
+    </tr>
+</template>

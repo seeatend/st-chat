@@ -1,0 +1,33 @@
+<template name="listPrivateGroupsModal">
+    <section id="listPrivateGroupsModal" class="rocket-modal {{this.class}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="wrapper">
+            <div class="window">
+                <form id="add-user-to-room-form" class="modal form-horizontal">
+                    <header>
+                        <h3 style="float: left">{{_ "Private_Groups_list"}}</h3>
+                        <span class="close"><i class="icon-cancel close-modal"></i></span>
+                    </header>
+                    <main>
+                        <div class="channel-list">
+                            <table>
+								{{#each groups}}
+                                    <tr>
+                                        <td>
+                                            <a href="{{pathFor 'group' name=name}}" class="channel-link">
+                                                <i class="icon-lock"></i>
+												{{name}}
+                                            </a>
+                                        </td>
+                                    </tr>
+								{{/each}}
+                            </table>
+                        </div>
+                    </main>
+                    <footer>
+                        <button class="button primary close-modal" type="submit" data-loading-text="{{_ "Please_wait"}}..."><span>Done</span></button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </section>
+</template>

@@ -1,0 +1,71 @@
+<template name="adminChannels">
+    <section class="page-container page-list">
+        <head class="fixed-title">
+			{{> burger}}
+            <h2>
+                <span class="room-title">Groups</span>
+            </h2>
+        </head>
+        <div class="content">
+            <h2>
+                Public Groups
+            </h2>
+            <br>
+            <div class="list">
+                <table>
+                    <tbody>
+                    {{#each publicChannels}}
+						{{> adminChannel}}
+					{{/each}}
+                    </tbody>
+                </table>
+            </div>
+			<br>
+            <h2>
+                Private Groups
+            </h2>
+            <br>
+            <div class="list">
+                <table>
+                    <tbody>
+					{{#each privateChannels}}
+						{{> adminChannel}}
+					{{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="flex-tab">
+        <div class="user-view">
+			{{> Template.dynamic template=flexTemplate data=flexData}}
+        </div>
+    </section>
+</template>
+
+<template name="adminChannel">
+    <tr class="user-info">
+        {{#unless editingChannelName}}
+            <td>{{name}}</td>
+            <td style="width: 20%">
+                <button class="edit-channel-name button secondary">
+                    <i class="icon-pencil" aria-label="Edit"></i>
+                </button>
+                <button class="delete-channel button secondary">
+                    <i class="icon-cancel" aria-label="Remove"></i>
+                </button>
+            </td>
+        {{/unless}}
+        {{#if editingChannelName}}
+            <input type="text" id="channel-name-field" value="{{name}}" dir="auto">
+            <td style="width: 20%">
+                <button class="save-channel-name button secondary">
+                    <i class="icon-check" aria-label="Edit"></i>
+                </button>
+                <button class="delete-channel button secondary">
+                    <i class="icon-cancel" aria-label="Remove"></i>
+                </button>
+            </td>
+        {{/if}}
+    </tr>
+</template>

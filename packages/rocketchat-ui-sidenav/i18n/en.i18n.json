@@ -1,0 +1,11 @@
+{
+  "All_patients" : "All patients",
+  "Create_new_patient" : "Patients",
+  "Duplicate_mrn" : "A patient with MRN '%s' exists",
+  "More_patients" : "More patients",
+  "Patients": "Patients",
+  "Patients_list": "Patients",
+  "Patient_first_name": "First name",
+  "Patient_last_name": "Last name",
+  "Patient_mrn": "MRN"
+}

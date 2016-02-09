@@ -1,0 +1,82 @@
+<template name="loginForm">
+    <form id="login-card" method='/'>
+		{{#if waitActivation}}
+            <header>
+                <h2>{{{_ "Registration_Succeeded"}}}</h2>
+                <p>{{{_ "Wait_activation_warning"}}}</p>
+                <p>{{{_ "Please_wait_activation"}}}</p>
+            </header>
+		{{else}}
+			{{#if needsValidateEmail}}
+                <div class="alert alert-danger">
+					{{_ "You_need_confirm_email"}}
+                </div>
+			{{/if}}
+            <div class="fields">
+                <div class='input-text active {{showMobileVerification}}'>
+                    <input type="text" name='mobileVerification' placeholder='SMS Code' dir="auto" />
+                </div>
+                <div class='input-text active {{showOrganizationName}}'>
+                    <input type="text" name='orgName' placeholder='Organization' />
+                </div>
+                <div class='input-text active {{showName}}'>
+                    <input type="text" name='firstName' placeholder='First Name' dir="auto" />
+                </div>
+                <div class='input-text active {{showName}}'>
+                    <input type="text" name='lastName' placeholder='Last Name' dir="auto" />
+                </div>
+                <div class='input-text active {{showDegree}}'>
+					{{> degreeSelect}}
+                </div>
+                <div class='input-text active {{showPhone}}'>
+                    <input type="text" name='mobilePhone' placeholder='Mobile Phone no.' />
+                </div>
+                <div class='input-text active {{showEmailOrUsername}}'>
+                    <input type="text" name='emailOrUsername' placeholder='Email' autocapitalize="off" autocorrect="off" />
+                </div>
+                <div class='input-text active {{showEmail}}'>
+                    <input type="email" name='email' placeholder='{{_ "Email"}}' />
+                </div>
+                <div class='input-text active {{showUsername}}'>
+                    <input type="text" name='username' placeholder='{{_ "Username"}}' />
+                </div>
+                <div class='input-text active {{showPassword}}'>
+                    <input type="password" id='pass' name='pass' placeholder='{{_ "Password"}}' />
+                </div>
+                <div class='input-text active {{showConfirmPassword}}'>
+                    <input type="password" name='confirm-pass' placeholder='{{_ "Confirm_password"}}' />
+                </div>
+            </div>
+			{{#if passwordErrors}}
+                <div class="alert alert-danger" role="alert" style="text-align: left">
+					Password must contain:
+					<ul>
+						{{#each passwordErrors}}
+							<li style="color: {{color}}">
+								{{text}}
+							</li>
+						{{/each}}
+					</ul>
+                </div>
+			{{/if}}
+            <div class="next {{showNextButton}}">
+                <button type="button" class='button primary login'>Next</button>
+            </div>
+            <div class="submit" {{showSubmitButton}}>
+                <button data-loading-text="{{_ "Please_wait"}}..." class='button primary login'><span>{{btnLoginSave}}</span></button>
+            </div>
+            <div class="register {{showRegisterLink}}">
+                <a href="">{{_ 'Register'}}</a>
+            </div>
+            <div class="forgot-password {{showForgotPasswordLink}}">
+                <a href="">{{_ 'Forgot_password'}}</a>
+            </div>
+		{{/if}}
+        <div class="back-to-login {{showBackToLoginLink}}">
+            <a href="">{{_ 'Back_to_login'}}</a>
+        </div>
+    </form>
+    <div class='login-terms'>
+		{{{loginTerms}}}
+    </div>
+</template>

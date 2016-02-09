@@ -1,0 +1,34 @@
+<template name="accountBox">
+	<div class="account-box" aria-label="{{_ "Account"}}" role="region">
+			{{#with myUserInfo}}
+					<div class="info status-{{status}}">
+						{{#if username}}
+							<div class="data">
+								<h2>{{organization}}</h2>
+								<h4>
+									<div class="thumb" data-status='{{visualStatus}}'></div>
+									{{displayName}}
+								</h4>
+							</div>
+						{{/if}}
+					</div>
+					<nav class="options animated-hidden">
+						<div class="wrapper">
+<!-- 							<a href="" data-status="online" class="status online"><span>{{_ "Online"}}</span></a>
+							<a href="" data-status="away" class="status away"><span>{{_ "Away" context="male"}}</span></a>
+							<a href="" data-status="busy" class="status busy"><span>{{_ "Busy" context="male"}}</span></a>
+							<a href="" data-status="offline" class="status offline"><span>{{_ "Invisible"}}</span></a> -->
+							{{#if showAdminOption }}
+								<a href="" id="admin" class='account-link'><i class="icon-wrench"></i><span>{{_ "Administration"}}</span></a>
+							{{/if}}
+							<a href="/preferences" id="accountPreferences"><i class="icon-sliders"></i><span>Preferences</span></a>
+							{{#each registeredMenus}}
+								<a href="" class="{{class}}"><i class="{{icon}}"></i><span>{{name}}</span></a>
+							{{/each}}
+              <!-- <a href="/invite-users" id="inviteUsers"><i class="icon-plus"></i><span>Invite Users</span></a> -->
+							<a href="" id="logout"><i class="icon-logout"></i><span>{{_ "Logout"}}</span></a>
+						</div>
+					</nav>
+			{{/with}}
+	</div>
+</template>

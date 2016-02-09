@@ -1,0 +1,23 @@
+{
+  "apn": {
+    "passphrase": "bkk17918",
+    "key": "ios/apn-production/StitchProdKey.pem",
+    "cert": "ios/apn-production/StitchProdCert.pem"
+  },
+  "apn-dev": {
+    "passphrase": "bkk17918",
+    "key": "ios/apn-development/StitchDevKey.pem",
+    "cert": "ios/apn-development/StitchDevCert.pem"
+  },
+  "gcm": {
+    "apiKey": "AIzaSyA-eKfseLONIDZcgsnHLYFR8u5gHpEn3Hs",
+    "projectNumber": 766636922967
+  },
+  "production": true,
+  "badge": true,
+  "sound": true,
+  "alert": true,
+  "vibrate": true,
+  "sendInterval": 1000,
+  "sendBatchSize": 10
+}

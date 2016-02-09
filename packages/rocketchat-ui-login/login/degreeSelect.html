@@ -1,0 +1,43 @@
+<template name="degreeSelect">
+    <select id="degree" name="degree">
+        <option value="" selected disabled>Please Select Degree</option>
+        <optgroup label="Physician">
+            <option {{selected "MD"}} value="MD">MD</option>
+            <option {{selected "DO"}} value="DO">DO</option>
+            <option {{selected "PGY1"}} value="PGY1">PGY1</option>
+            <option {{selected "PGY2"}} value="PGY2">PGY2</option>
+            <option {{selected "PGY3"}} value="PGY3">PGY3</option>
+            <option {{selected "Fellow"}} value="Fellow">Fellow</option>
+        </optgroup>
+        <optgroup label="Nurse">
+            <option {{selected "CNA"}} value="CNA">CNA</option>
+            <option {{selected "CNM"}} value="CNM">CNM</option>
+            <option {{selected "CNS"}} value="CNS">CNS</option>
+            <option {{selected "CRNA"}} value="CRNA">CRNA</option>
+            <option {{selected "LPN"}} value="LPN">LPN</option>
+            <option {{selected "NP"}} value="NP">NP</option>
+            <option {{selected "RN"}} value="RN">RN</option>
+        </optgroup>
+        <optgroup label="Other Clinical">
+            <option {{selected "Behavioral Therapist"}} value="Behavioral Therapist">Behavioral Specialist</option>
+            <option {{selected "Case Manager"}} value="Case Manager">Case Manager</option>
+            <option {{selected "Medical Scribe"}} value="Medical Scribe">Medical Scribe</option>
+            <option {{selected "Medical Student"}} value="Medical Student">Medical Student</option>
+            <option {{selected "PA"}} value="PA">PA</option>
+            <option {{selected "CPhT"}} value="CPhT">CPhT</option>
+            <option {{selected "Pharmacy Assistant"}} value="Pharmacy Assistant">Pharmacy Assistant</option>
+            <option {{selected "PharmD"}} value="PharmD">PharmD</option>
+            <option {{selected "PsyD"}} value="PsyD">Psychiatrist</option>
+            <option {{selected "Social Worker"}} value="Social Worker">Social Worker</option>
+        </optgroup>
+        <optgroup label="Non-Clinical">
+            <option {{selected "Admin"}} value="Admin">Admin</option>
+            <option {{selected "Front Desk"}} value="Front Desk">Front Desk</option>
+            <option {{selected "Referrals"}} value="Referrals">Referrals</option>
+        </optgroup>
+        <option {{selected "Other"}} value="Other">Other</option>
+    </select>
+	<div class='input-text active {{showOther}}'>
+		<input type="text" id="otherDegree" name='otherDegree' placeholder='Degree' />
+	</div>
+</template>
